@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+margin:0;
+padding:0;
+}
+.tab{
+    width:240px;
+    margin:50px;
+    /*border:1px solid;*/
+}
+.tab_menu{
+    clear:both;
+}
+.tab_menu li{
+    float:left;  /*将导航头左飘*/
+    text-align:center;  /*将文字居中*/
+    list-style:none;  /*去除标记符号*/
+    background:#F1F1F1; /*设置默认背景色*/
+    border:1px solid #898989; /*设置边框色*/
+    margin-right:4px; /*每个li之间的距离为4px*/
+    cursor:pointer;  /*鼠标浮上之后，会有小手的标示出现*/
+    padding:1px 6px; /*控制li的内部距离*/
+    border-bottom:none; 
+
+}
+.tab_menu li.hover{
+    background:#DFDFDF;
+}
+.tab_menu li.selected{/*为选中的选项加背景与颜色*/
+    color:#FFF; 
+    background:#6D84B4;
+}
+.tab_box{
+    clear:both; /*清楚float效果的影响*/
+    height:100px; /*设置高度为100px*/
+    border:1px solid #898989; /*设置内容体的边框样式*/
+}
+.hide{/*隐藏需要隐藏的内容div*/
+    display:none;
+}
+    </style>
+</head>
+<body>
+    <div class="tab">
+    <div class="tab_menu">
+        <ul>
+            <li class="selected">时事</li>
+            <li>体育</li>
+            <li>娱乐</li>
+        </ul>
+    </div>
+    <div class="tab_box"> 
+         <div>时事</div>
+         <div class="hide">体育</div>
+         <div class="hide">娱乐</div>
+    </div>
+</div>
+<script src="https://cdn.bootcss.com/jquery/3.2.0/jquery.slim.min.js"></script>
+<script type='text/javascript'>
+$(function(){
+    //1.点击时改变css属性，移除之前的selected选项，添加新的selected选项
+    //2.隐藏之前的div层，显示对应得div层
+    //为导航中的li注册点击事件
+    var $div_li = $(".tab_menu ul li");
+    $div_li.click(function(){
+        $(this).addClass('selected').siblings().removeClass('selected');
+        //var index = $div_li.index(this);
+        //$("div.tab_box > div").eq(index).show().siblings().hide();
+        var text = $(this).text();
+        if(text=='时事')
+        {
+            $('.tab_box div:contains("时事")').removeClass('hide').siblings().addClass('hide');
+        }
+        if(text=='体育')
+        {
+            $('.tab_box div:contains("体育")').removeClass('hide').siblings().addClass('hide');
+        }
+        if(text=='娱乐')
+        {
+            $('.tab_box div:contains("娱乐")').removeClass('hide').siblings().addClass('hide');
+        }
+    }).hover(function(){
+            $(this).addClass("hover");
+        },function(){
+            $(this).removeClass("hover");
+        });
+});
+</script>
+</body>
+</html>
